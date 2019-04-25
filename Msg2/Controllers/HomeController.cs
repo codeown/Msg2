@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Msg2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace Msg2.Controllers
 {
     public class HomeController : Controller
     {
+        Msg2Context db = new Msg2Context();
+
         public ActionResult Index()
         {
             return View();
@@ -26,5 +29,22 @@ namespace Msg2.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Send()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public string Send(Message message)
+        {
+            message.DateTime = DateTime.Now;
+            db.Messages.Add(message);
+            db.SaveChanges();
+
+            return "Соообщение отправлено";
+        }
+
     }
 }
