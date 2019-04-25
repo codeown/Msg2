@@ -9,7 +9,7 @@ namespace Msg2.Controllers
 {
     public class HomeController : Controller
     {
-        Msg2Context db = new Msg2Context();
+        Msg2Context db = new Msg2Context();  //Создание объекта контекста данных
 
         public ActionResult Index()
         {
@@ -29,7 +29,7 @@ namespace Msg2.Controllers
 
             return View();
         }
-
+        //==================================================
         [HttpGet]
         public ActionResult Send()
         {
@@ -37,13 +37,15 @@ namespace Msg2.Controllers
         }
 
         [HttpPost]
-        public string Send(Message message)
+        public string Send(Message message)  //В качестве принимаемого параметра указываем модель Message, объект назовем message
         {
-            message.DateTime = DateTime.Now;
-            db.Messages.Add(message);
-            db.SaveChanges();
+            //From и Body подставятся из формы. MessageId генерируется автоматически БД, как первичный ключ
 
-            return "Соообщение отправлено";
+            message.DateTime = DateTime.Now;  //DateTime заполним текущим временем
+            db.Messages.Add(message); //Добавим эти данные в БД
+            db.SaveChanges(); //Сохраним изменения в БД
+
+            return $"{message.From}, Ваше соообщение отправлено";           
         }
 
     }
