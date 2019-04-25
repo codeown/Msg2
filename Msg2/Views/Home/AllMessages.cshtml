@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "AllMessages";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        All users
+    </title>
+</head>
+
+<body>
+    <h2>Все пользователи</h2>
+
+    <br />
+
+    <table>
+        <thead>
+            <tr>
+                <td>Id сообщения</td>
+                <td>Время отправления</td>
+                <td>Кто отправил</td>
+                <td>Текст сообщения</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                foreach (var messagesAll in ViewBag.Messages)
+                {
+                    <tr>
+                        <td>@messagesAll.MessageId</td>
+                        <td>@messagesAll.DateTime</td>
+                        <td>@messagesAll.From</td>
+                        <td>@messagesAll.Body</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</body>
+
+</html>

@@ -44,8 +44,17 @@ namespace Msg2.Controllers
             message.DateTime = DateTime.Now;  //DateTime заполним текущим временем
             db.Messages.Add(message); //Добавим эти данные в БД
             db.SaveChanges(); //Сохраним изменения в БД
+                        
+            return $"{message.From}, Ваше соообщение отправлено";  
+            
+        }
+        //==================================================
 
-            return $"{message.From}, Ваше соообщение отправлено";           
+        public ActionResult AllMessages()
+        {
+            IEnumerable<Message> messages = db.Messages;
+            ViewBag.Messages = messages;
+            return View();
         }
 
     }
