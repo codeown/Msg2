@@ -1,6 +1,7 @@
-﻿
+﻿@model Msg2.Models.MessageListViewModel
+
 @{
-    ViewBag.Title = "AllMessages";
+    ViewBag.Title = "MessagesFilter";
 }
 
 <!DOCTYPE html>
@@ -16,6 +17,14 @@
     <h2>Все сообщения</h2>
 
     <br />
+    <p>
+        @Html.ActionLink("Написать сообщение", "Send")
+    </p>
+
+    <br />
+
+   
+
 
     <table>
         <thead>
@@ -29,13 +38,13 @@
 
         <tbody>
             @{
-                foreach (var messagesAll in ViewBag.Messages)
+                foreach (var item in Model.Messages)
                 {
                     <tr>
-                        <td>@messagesAll.MessageId</td>
-                        <td>@messagesAll.DateTime</td>
-                        <td>@messagesAll.From</td>
-                        <td>@messagesAll.Body</td>
+                        <td>@Html.DisplayFor(modelItem => item.MessageId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateTime)</td>
+                        <td>@Html.DisplayFor(modelItem => item.From)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Body)</td>
                     </tr>
                 }
             }

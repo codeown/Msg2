@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Msg2.Controllers
 {
@@ -50,11 +51,31 @@ namespace Msg2.Controllers
         }
         //==================================================
 
-        public ActionResult AllMessages()
+        public ActionResult AllMessages() //Вывод всех сообщений
         {
             IEnumerable<Message> messages = db.Messages;
             ViewBag.Messages = messages;
             return View();
+        }
+
+        public ActionResult MessagesFilter(DateTime? DateTime) //Вывод всех сообщений с фильтрацией
+        {
+            //IEnumerable<Message> messages = db.Messages;
+            //ViewBag.Messages = messages;
+
+            ViewBag.NameSortParm = DateTime == "Date" ? "Date desc" : "Date";
+            var messgs = from DateTime in db.Messages select DateTime;
+            switch (DateTime)
+            {
+                case "Date":
+                    messgs = messgs.OrderBy(s => s.DateTime);
+                    break;
+                case "Date desc":
+                    messgs = messgs.OrderByDescending(s => s.DateTime);
+                    break;
+            }
+
+            return View(messgs.ToList());
         }
 
     }

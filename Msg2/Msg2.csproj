@@ -178,6 +178,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Send.cshtml" />
     <Content Include="Views\Home\AllMessages.cshtml" />
+    <Content Include="Views\Home\MessagesFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
